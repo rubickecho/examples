@@ -9,18 +9,31 @@
     "@uniswap/sdk-core": "^3.1.0",
     "@uniswap/smart-order-router": "^3.3.0",
     "@uniswap/v3-sdk": "^3.9.0",
+    "assert": "^2.1.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
     "ethers": "^5.7.2",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
     "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.4.2"
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "typescript": "^4.4.2",
+    "url": "^0.11.4",
+    "util": "^0.12.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-app-rewired start",
+    "dev": "react-app-rewired start",
     "build": "react-scripts build",
     "lint": "yarn eslint .",
     "install:chain": "curl -L https://foundry.paradigm.xyz | bash && clear && echo $0 | exec && foundryup",
-    "start:chain": "anvil --chain-id 1337 --fork-url"
+    "start:chain": "anvil --chain-id 1337 --fork-url https://mainnet.infura.io/v3/d15a2c9b944d418c8db78ce3755ea30b"
   },
   "eslintConfig": {
     "extends": [
