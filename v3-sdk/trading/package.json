@@ -19,7 +19,10 @@
     "build": "react-scripts build",
     "lint": "yarn eslint .",
     "install:chain": "curl -L https://foundry.paradigm.xyz | bash && clear && echo $0 | exec && foundryup",
-    "start:chain": "anvil --chain-id 1337 --fork-url"
+    "start:chain": "anvil --chain-id 1337 --fork-url",
+    "start:chain-sh": "sh ./scripts/start-chain.sh",
+    "chain:console": "hardhat console --network local",
+    "monitor": "hardhat run scripts/monitor.ts --network local"
   },
   "eslintConfig": {
     "extends": [
@@ -40,8 +43,11 @@
     ]
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.8",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.12",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
+    "chalk": "^5.3.0",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -50,6 +56,7 @@
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "hardhat": "^2.22.16",
     "prettier": "^2.8.0"
   },
   "engines": {

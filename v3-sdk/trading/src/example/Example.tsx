@@ -24,6 +24,8 @@ const useOnBlockUpdated = (callback: (blockNumber: number) => void) => {
 
 const Example = () => {
   const [trade, setTrade] = useState<TokenTrade>()
+
+  // Transaction State
   const [txState, setTxState] = useState<TransactionState>(TransactionState.New)
 
   const [tokenInBalance, setTokenInBalance] = useState<string>()
@@ -60,13 +62,16 @@ const Example = () => {
     }
   }, [refreshBalances])
 
+  // 创建交易
   const onCreateTrade = useCallback(async () => {
     refreshBalances()
     setTrade(await createTrade())
   }, [refreshBalances])
 
+  // Execute Trade
   const onTrade = useCallback(async (trade: TokenTrade | undefined) => {
     if (trade) {
+      // 设置交易状态
       setTxState(await executeTrade(trade))
     }
   }, [])
@@ -100,7 +105,7 @@ const Example = () => {
       <h3>{`${CurrentConfig.tokens.in.symbol} Balance: ${tokenInBalance}`}</h3>
       <h3>{`${CurrentConfig.tokens.out.symbol} Balance: ${tokenOutBalance}`}</h3>
       <button
-        onClick={() => wrapETH(100)}
+        onClick={() => wrapETH(10)}
         disabled={getProvider() === null || CurrentConfig.rpc.mainnet === ''}>
         <p>Wrap ETH</p>
       </button>

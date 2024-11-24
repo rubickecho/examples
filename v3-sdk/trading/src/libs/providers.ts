@@ -40,6 +40,7 @@ export function getWalletAddress(): string | null {
     : wallet.address
 }
 
+// 发送交易, 浏览器插件或钱包
 export async function sendTransaction(
   transaction: ethers.providers.TransactionRequest
 ): Promise<TransactionState> {
@@ -72,6 +73,7 @@ export async function connectBrowserExtensionWallet() {
 
 // Internal Functionality
 
+// 创建钱包实例，基于钱包或本地
 function createWallet(): ethers.Wallet {
   let provider = mainnetProvider
   if (CurrentConfig.env == Environment.LOCAL) {
@@ -98,6 +100,7 @@ async function sendTransactionViaExtension(
       'eth_sendTransaction',
       [transaction]
     )
+    console.log('sendTransactionViaExtension receipt>>>>', receipt)
     if (receipt) {
       return TransactionState.Sent
     } else {
@@ -109,14 +112,16 @@ async function sendTransactionViaExtension(
   }
 }
 
+// 发送交易，基于钱包
 async function sendTransactionViaWallet(
   transaction: ethers.providers.TransactionRequest
 ): Promise<TransactionState> {
   if (transaction.value) {
     transaction.value = BigNumber.from(transaction.value)
   }
+  // 发送交易
   const txRes = await wallet.sendTransaction(transaction)
-
+  console.log('sendTransaction txRes>>>>', txRes)
   let receipt = null
   const provider = getProvider()
   if (!provider) {
@@ -125,8 +130,9 @@ async function sendTransactionViaWallet(
 
   while (receipt === null) {
     try {
+      // 获取交易回执
       receipt = await provider.getTransactionReceipt(txRes.hash)
-
+      console.log('getTransactionReceipt receipt>>>>', receipt)
       if (receipt === null) {
         continue
       }

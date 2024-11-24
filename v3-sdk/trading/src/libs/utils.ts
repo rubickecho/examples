@@ -2,7 +2,7 @@ import { Token, TradeType } from '@uniswap/sdk-core'
 import { Trade } from '@uniswap/v3-sdk'
 import { BigNumber, ethers } from 'ethers'
 
-const MAX_DECIMALS = 4
+const MAX_DECIMALS = 18
 
 export function fromReadableAmount(
   amount: number,

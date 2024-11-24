@@ -32,10 +32,10 @@ export interface ExampleConfig {
 // Example Configuration
 
 export const CurrentConfig: ExampleConfig = {
-  env: Environment.LOCAL,
+  env: Environment.WALLET_EXTENSION,
   rpc: {
     local: 'http://localhost:8545',
-    mainnet: '',
+    mainnet: 'https://mainnet.infura.io/v3/<your-project-id>',
   },
   wallet: {
     address: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
@@ -44,7 +44,7 @@ export const CurrentConfig: ExampleConfig = {
   },
   tokens: {
     in: WETH_TOKEN,
-    amountIn: 1,
+    amountIn: 0.01,
     out: USDC_TOKEN,
     poolFee: FeeAmount.MEDIUM,
   },

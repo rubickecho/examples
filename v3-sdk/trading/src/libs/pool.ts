@@ -7,31 +7,50 @@ import { POOL_FACTORY_CONTRACT_ADDRESS } from './constants'
 import { getProvider } from './providers'
 
 interface PoolInfo {
+  // 代币0
   token0: string
+  // 代币1
   token1: string
+  // 费用
   fee: number
+  // 滑点
   tickSpacing: number
+  // 平方根价格: 价格的平方根，使用 Q96.64 定点数格式
   sqrtPriceX96: ethers.BigNumber
+  // 流动性
   liquidity: ethers.BigNumber
+  // 价格刻度，用于在 Uniswap V3 中表示价格范围
   tick: number
 }
 
+// 获取池子信息
+// 这个方法在进行交易前很重要
+// 1. 验证池子是否存在
+// 2. 过去当前价格
+// 3. 检查流动性情况
+// 4. 确认交易参数
 export async function getPoolInfo(): Promise<PoolInfo> {
+  // 1. 获取提供者
   const provider = getProvider()
   if (!provider) {
     throw new Error('No provider')
   }
 
+  // 计算池子地址
   const currentPoolAddress = computePoolAddress({
     factoryAddress: POOL_FACTORY_CONTRACT_ADDRESS,
-    tokenA: CurrentConfig.tokens.in,
-    tokenB: CurrentConfig.tokens.out,
-    fee: CurrentConfig.tokens.poolFee,
+    tokenA: CurrentConfig.tokens.in, // 输入代币
+    tokenB: CurrentConfig.tokens.out, // 输出代币
+    fee: CurrentConfig.tokens.poolFee, // 手续费级别
   })
 
+  // 实例化池子合约
   const poolContract = new ethers.Contract(
+    // 池子地址
     currentPoolAddress,
+    // 池子ABI
     IUniswapV3PoolABI.abi,
+    // 提供者
     provider
   )
 

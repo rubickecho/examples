@@ -63,6 +63,8 @@ export async function wrapETH(eth: number) {
     maxPriorityFeePerGas: MAX_PRIORITY_FEE_PER_GAS,
   }
 
+  console.log('wrapETH transaction:', transaction);
+
   await sendTransaction(transaction)
 }
 
