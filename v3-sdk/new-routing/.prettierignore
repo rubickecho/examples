@@ -1,0 +1,7 @@
+// 忽略特定文件或目录
+build/*
+dist/*
+node_modules/*
+*.test.js
+src/*
+scripts/*
